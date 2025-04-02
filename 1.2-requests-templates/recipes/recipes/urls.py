@@ -19,5 +19,5 @@ from calculator.views import home_view, recipe_view
 
 urlpatterns = [
     path('', home_view, name='home_view'),
-    path('recipe/<str:dish>/', recipe_view, name='recipe_view'),
+    path('<str:dish>/', recipe_view, name='recipe_view'),
 ]

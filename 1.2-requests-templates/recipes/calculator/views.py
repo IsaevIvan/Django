@@ -31,12 +31,16 @@ def home_view(request):
     return render(request, 'calculator/home.html', {'recipe_names': recipe_names})
 
 
-
 def recipe_view(request, dish):
+    person = int(request.GET.get('person', 1))  # Получаем значение person из GET-запроса или используем 1 по умолчанию
 
     if dish in DATA:
         recipe = DATA[dish]
-        context = {'recipe': recipe}
+
+        # Увеличиваем количество ингредиентов в зависимости от person
+        adjusted_recipe = {ingredient: quantity * person for ingredient, quantity in recipe.items()}
+
+        context = {'recipe': adjusted_recipe}
         return render(request, 'calculator/index.html', context)
     else:
-        return HttpResponse(f"Рецепт для '{dish}' не найден.")  # Или можно использовать 404.
+        return HttpResponse(f"Рецепт для '{dish}' не найден.")
