@@ -7,7 +7,7 @@
 <body>
     <h1>Добро пожаловать!</h1>
 
-    <h2>Вот меню на выбор:</h2>
+    <h2>Вот меню на выбор :</h2>
     <ul>
         {% for item in recipe_names %}
             <li><a href="{% url 'recipe_view' item %}">{{ item }}</a></li>
