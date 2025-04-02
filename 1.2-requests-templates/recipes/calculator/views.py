@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 
 DATA = {
@@ -25,12 +26,17 @@ DATA = {
     # можете добавить свои рецепты ;)
 }
 
-# Напишите ваш обработчик. Используйте DATA как источник данных
-# Результат - render(request, 'calculator/index.html', context)
-# В качестве контекста должен быть передан словарь с рецептом:
-# context = {
-#   'recipe': {
-#     'ингредиент1': количество1,
-#     'ингредиент2': количество2,
-#   }
-# }
+def home_view(request):
+    recipe_names = DATA.keys()
+    return render(request, 'calculator/home.html', {'recipe_names': recipe_names})
+
+
+
+def recipe_view(request, dish):
+
+    if dish in DATA:
+        recipe = DATA[dish]
+        context = {'recipe': recipe}
+        return render(request, 'calculator/index.html', context)
+    else:
+        return HttpResponse(f"Рецепт для '{dish}' не найден.")  # Или можно использовать 404.
