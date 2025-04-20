@@ -1,6 +1,5 @@
 from django.contrib import admin
-
-from books.models import Book
+from .models import Book
 
 
 class BookAdmin(admin.ModelAdmin):
