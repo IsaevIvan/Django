@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Каталог книг{% endblock %}
+{% block content %}
+<div class="container">
+        <div class="header">
+            <h1><a href="/books">Каталог</a></h1>
+        </div>
+
+
+      <div class="Book">
+          <style>
+        .book-item {
+            width: 300px;
+            margin: 20px;
+            text-align: center;
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        .book-item h2 {
+            color: #007bff;
+        }
+          </style>
+        {% if book %}
+
+                <div class="book-item">
+                <h2>{{ book.name }}</h2>
+                <p>Автор: {{ book.author }}</p>
+                <p>Дата публикации: {{ book.pub_date }}</p>
+
+
+        {% else %}
+
+
+                В эту дату не было опубликовано ни одной книги.
+
+
+        {% endif %}
+
+
+
+            {% if previous_date %}
+                <a href="{% url 'book_detail_by_date' pub_date=previous_date %}">&lt; {{ previous_date }}</a>
+            {% endif %}
+
+            {% if next_date %}
+                <a href="{% url 'book_detail_by_date' pub_date=next_date %}">{{ next_date }} &gt;</a>
+            {% endif %}
+            </div>
+
+{% endblock %}
