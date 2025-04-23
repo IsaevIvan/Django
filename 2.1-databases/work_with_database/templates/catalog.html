@@ -21,12 +21,69 @@
       {% for phone in phones %}
         <div class="phone">
           <a href="{% url 'phone' phone.slug %}">
-            <h3>{{ phone.name }}</h3>
+            <h3 class="phone-name">{{ phone.name }}</h3>
           </a>
-          <div class="price">Стоимость: {{ phone.price }} ₽</div>
-          <img height="400" src="{{ phone.image }}" alt="{{ phone.name }}"/>
+          <div class="phone-price">Стоимость: {{ phone.price }} ₽</div>
+          <img class="phone-image" src="{{ phone.image }}" alt="{{ phone.name }}"/>
         </div>
       {% endfor %}
     </div>
   </div>
+{% endblock %}
+
+{% block styles %}
+<style>
+    .container {
+        font-family: Arial, sans-serif;
+        margin: 20px auto;
+        max-width: 1200px;
+        padding: 20px;
+    }
+
+    .header {
+        text-align: left;
+        margin-bottom: 30px;
+    }
+
+    .sort-block {
+        margin-bottom: 30px;
+    }
+
+    .content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    .phone {
+        width: 300px;
+        margin: 10px;
+        border: 0px solid #ccc;
+        padding: 10px;
+        text-align: center;
+        display: flex;           /* Используем flexbox для phone */
+        flex-direction: column;  /* Располагаем элементы в столбец */
+        align-items: center;    /* Центрируем по горизонтали */
+    }
+
+    .phone-name {
+        font-size: 28px;
+        font-weight: normal;
+        margin-bottom: 10px;
+        color: #007bff;
+    }
+
+    .phone-price {
+        font-size: 20px;
+        margin-bottom: 10px;
+        color: #333;
+    }
+
+    .phone-image {
+        max-width: 90%;
+        height: auto;
+        margin-bottom: auto; /* Выравниваем изображение по низу, а название сверху */
+    }
+</style>
 {% endblock %}
