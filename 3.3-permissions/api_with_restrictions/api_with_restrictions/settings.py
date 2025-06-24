@@ -76,7 +76,17 @@ TEMPLATES = [
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
-    ]
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    ],
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend',
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '10/minute',  # Лимит для анонимов
+        'user': '20/minute',  # Лимит для авторизованных
+    }
 }
 
 WSGI_APPLICATION = 'api_with_restrictions.wsgi.application'
@@ -91,6 +101,8 @@ DATABASES = {
         'NAME': 'netology_classified_ads',
         'HOST': '127.0.0.1',
         'PORT': '5432',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
     }
 }
 
@@ -127,6 +139,7 @@ USE_L10N = True
 
 USE_TZ = True
 
+PAGE_SIZE = 20
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
