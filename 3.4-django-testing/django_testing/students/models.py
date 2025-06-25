@@ -1,3 +1,5 @@
+from django.conf import settings
+from django.core.exceptions import ValidationError
 from django.db import models
 
 
@@ -18,3 +20,7 @@ class Course(models.Model):
         Student,
         blank=True,
     )
+
+    def clean(self):
+        if self.students.count() > settings.MAX_STUDENTS_PER_COURSE:
+            raise ValidationError("Слишком много студентов на курсе!")
